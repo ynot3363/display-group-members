@@ -1,0 +1,37 @@
+@import "~@fluentui/react/dist/sass/References.scss";
+
+.container {
+  overflow: hidden;
+  padding: 1em;
+  color: "[theme:bodyText, default: #323130]";
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 50px;
+
+  .header {
+    font-size: 24px;
+    margin-block: 0px;
+  }
+
+  ul {
+    padding-inline-start: 0px;
+
+    .group {
+      list-style: none;
+      display: flex;
+      flex-direction: row;
+      justify-content: start;
+      gap: 20px;
+      align-items: center;
+      font-size: 18px;
+      margin-bottom: 10px;
+
+      .groupName {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        width: 300px;
+        overflow: hidden;
+      }
+    }
+  }
+}
