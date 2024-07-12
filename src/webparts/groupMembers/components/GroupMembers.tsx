@@ -4,6 +4,8 @@ import type { IGroupMembersProps } from "./IGroupMembersProps";
 import { PrimaryButton } from "@fluentui/react/lib/Button";
 import { MSGraphClientV3 } from "@microsoft/sp-http";
 import { IMember } from "../models/IMember";
+import { LivePersonaCard } from "./LivePersonaCard/LivePersonaCard";
+import { Persona, PersonaSize } from "@fluentui/react/lib/Persona";
 
 interface IGroupMembersState {
   members: IMember[];
@@ -54,13 +56,29 @@ export default class GroupMembers extends React.Component<
           <h4 className={styles.header}>
             <strong>Members:</strong>
           </h4>
-          {this.state.members.map((member) => {
-            return (
-              <li key={member.id}>
-                <span>{member.displayName}</span>
-              </li>
-            );
-          })}
+          <div className={styles.memberContainer}>
+            {this.state.members.map((member) => {
+              return (
+                <LivePersonaCard
+                  key={member.id}
+                  upn={member.userPrincipalName}
+                  serviceScope={this.props.context.serviceScope}
+                  template={
+                    <Persona
+                      imageUrl={`/_layouts/15/userphoto.aspx?size=L&accountname=${member.mail}`}
+                      imageShouldFadeIn={false}
+                      imageShouldStartVisible={true}
+                      text={member.displayName}
+                      secondaryText={member.jobTitle}
+                      tertiaryText={member.mail}
+                      size={PersonaSize.size48}
+                      imageAlt={member.displayName}
+                    />
+                  }
+                />
+              );
+            })}
+          </div>
         </div>
       </section>
     );
